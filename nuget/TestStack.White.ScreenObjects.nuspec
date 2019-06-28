@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Salabs.TestStack.White.ScreenObjects</id>
+    <version>$version$</version>
+    <title>Salabs.TestStack.White.ScreenObjects</title>
+    <description>Salabs.TestStack.White.ScreenObjects adds support for the Page Object Pattern, allowing you to write clean maintainable UI Tests</description>
+    <authors>Vivek Singh, Jake Ginnivan</authors>
+    <owners>Jake Ginnivan</owners>
+    <licenseUrl>https://github.com/salabs/White/blob/master/LICENSE.txt</licenseUrl>
+    <iconUrl>https://raw.github.com/salabs/White/master/logo.png</iconUrl>
+    <projectUrl>https://github.com/salabs/White</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright Jake Ginnivan 2013</copyright>
+    <tags>White UIAutomation Testing UIA WPF Silverlight Win32 Automation PageObject TestStack</tags>
+    <dependencies>
+      <dependency id="Salabs.TestStack.White" version="$version$" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\src\TestStack.White\bin\$configuration$\TestStack.White.dll" target="lib\net40" />
+    <file src="..\src\TestStack.White.ScreenObjects\bin\$configuration$\TestStack.White.ScreenObjects.dll" target="lib\net40" />
+    <file src="..\src\TestStack.White.ScreenObjects\bin\$configuration$\TestStack.White.ScreenObjects.pdb" target="lib\net40" />
+    <file src="..\src\TestStack.White.ScreenObjects\bin\$configuration$\TestStack.White.Reporting.dll" target="lib\net40" />
+    <file src="..\src\TestStack.White.ScreenObjects\bin\$configuration$\TestStack.White.Reporting.pdb" target="lib\net40" />
+  </files>
+</package>

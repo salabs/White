@@ -1,0 +1,43 @@
+jobs:
+- job: 'build'
+  pool:
+    vmImage: vs2017-win2016
+  variables:
+    build_type: Release
+    platform: Any CPU
+    solution: src\TestStack.WhiteX.sln
+    pkgdir: pkgs
+  steps:
+    - script: |
+        choco install gitversion.portable -pre -y
+      displayName: install git dependencies
+    - task: NuGetToolInstaller@0
+      inputs:
+        versionSpec: '4.3.0'
+    - script: |
+          nuget restore $(solution)
+      displayName: Download All NuGet packages
+    - script: |
+        gitversion -l console -output buildserver -updateAssemblyInfo
+      displayName: Update version with gitversion
+    - task: MSBuild@1
+      inputs:
+        solution: $(solution)
+        msbuildArchitecture: 'x64'
+        platform: $(platform)
+        configuration: $(build_type)
+        clean: false
+        restoreNugetPackages: false
+        createLogFile: true
+        logFileVerbosity: 'detailed'
+    - script: |
+        mkdir $(pkgdir)
+        cd $(pkgdir)
+        nuget pack ..\nuget\TestStack.White.nuspec -version "%GitVersion_NuGetVersion%" -prop "configuration=$(build_type)"
+        nuget pack ..\nuget\TestStack.White.ScreenObjects.nuspec -version "%GitVersion_NuGetVersion%" -prop "configuration=$(build_type)"
+
+      displayName: Create Nuget Package
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: $(pkgdir)
+        artifactName: 'NuGet Packages'
